@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_list/app/data/models/task.dart';
 
@@ -8,6 +9,9 @@ class HomeController extends GetxController {
   HomeController({
     required this.taskRepository,
   });
+
+  final formKey = GlobalKey<FormState>();
+  final editController = TextEditingController();
 
   final tasks = <Task>[].obs;
 

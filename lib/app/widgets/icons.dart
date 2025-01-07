@@ -2,7 +2,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:todo_list/app/core/value/icons.dart';
 
-
 List<Icon> getIcons(){
  return const [
   Icon(IconData(personIcon, fontFamily: 'MaterialIcons')),

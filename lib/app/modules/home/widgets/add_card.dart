@@ -25,6 +25,7 @@ class AddCard extends StatelessWidget {
               ),
               radius: 5,
               title: 'Task Type',
+              titleStyle: const TextStyle(fontWeight: FontWeight.bold),
               content: Form(
                 key: homeController.formKey,
                 child: Column(
@@ -37,7 +38,7 @@ class AddCard extends StatelessWidget {
                           border: OutlineInputBorder(),
                           labelText: 'Title',
                         ),
-                        validator: (value){
+                        validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Please enter your task title';
                           }
@@ -45,6 +46,30 @@ class AddCard extends StatelessWidget {
                         },
                       ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5.0.wp),
+                      child: Wrap(
+                        spacing: 2.0.wp,
+                        children: icons
+                            .map((e) => Obx(() {
+                                  final index = icons.indexOf(e);
+                                  return ChoiceChip(
+                                    selectedColor: Colors.grey[200],
+                                    pressElevation: 0,
+                                    backgroundColor: Colors.white,
+                                    label: e,
+                                    selected:
+                                        homeController.chipIndex.value == index,
+                                    onSelected: (bool selected) {
+                                      homeController.chipIndex.value = selected
+                                          ? index
+                                          : 0;
+                                    },
+                                  );
+                                }))
+                            .toList(),
+                      ),
+                    )
                   ],
                 ),
               ));

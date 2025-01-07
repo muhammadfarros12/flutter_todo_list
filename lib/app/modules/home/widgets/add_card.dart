@@ -1,7 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:todo_list/app/core/utils/extensions.dart';
+import 'package:todo_list/app/data/models/task.dart';
 import 'package:todo_list/app/modules/home/controller.dart';
 import 'package:todo_list/app/widgets/icons.dart';
 
@@ -61,18 +63,49 @@ class AddCard extends StatelessWidget {
                                     selected:
                                         homeController.chipIndex.value == index,
                                     onSelected: (bool selected) {
-                                      homeController.chipIndex.value = selected
-                                          ? index
-                                          : 0;
+                                      homeController.chipIndex.value =
+                                          selected ? index : 0;
                                     },
                                   );
                                 }))
                             .toList(),
                       ),
-                    )
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 3, 135, 242),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            minimumSize: const Size(150, 40)),
+                        onPressed: () {
+                          if (homeController.formKey.currentState!.validate()) {
+                            int icon = icons[homeController.chipIndex.value]
+                                .icon!
+                                .codePoint;
+                            String color = icons[homeController.chipIndex.value]
+                                .color!
+                                .toHex();
+                            var task = Task(
+                              title: homeController.editController.text,
+                              icon: icon,
+                              color: color,
+                            );
+                            Get.back();
+                            homeController.addTask(task)
+                                ? EasyLoading.showSuccess('Create success')
+                                : EasyLoading.showError('Duplicated Task');
+                          }
+                        },
+                        child: const Text(
+                          'Confirm',
+                          style: TextStyle(color: Colors.white),
+                        ))
                   ],
                 ),
               ));
+              homeController.editController.clear();
+              homeController.changeChipIndex(0);
         },
         child: DottedBorder(
             color: Colors.grey[400]!,

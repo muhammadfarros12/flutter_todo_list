@@ -31,7 +31,11 @@ class HomePage extends GetView<HomeController> {
           physics: const ClampingScrollPhysics(),
           children: [
             TaskCard(task: Task(title: 'title', icon: 0xe59c, color: '#ff0000')),
-            AddCard()],
+            TaskCard(task: Task(title: 'title', icon: 0xe59c, color: '#ff0000')),
+            TaskCard(task: Task(title: 'title', icon: 0xe59c, color: '#ff0000')),
+            // ...controller.tasks.map((element) => TaskCard(task: element)),
+            AddCard()
+          ],
         )
       ],
     )));

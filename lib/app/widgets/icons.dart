@@ -1,14 +1,20 @@
-
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:todo_list/app/core/value/icons.dart';
 
-List<Icon> getIcons(){
- return const [
-  Icon(IconData(personIcon, fontFamily: 'MaterialIcons')),
-  Icon(IconData(workIcon, fontFamily: 'MaterialIcons')),
-  Icon(IconData(movieIcon, fontFamily: 'MaterialIcons')),
-  Icon(IconData(sportIcon, fontFamily: 'MaterialIcons')),
-  Icon(IconData(travelIcon, fontFamily: 'MaterialIcons')),
-  Icon(IconData(shopIcon, fontFamily: 'MaterialIcons')),
- ];
+class IconWithColor {
+  final int iconCodePoint;
+  final Color color;
+
+  IconWithColor({required this.iconCodePoint, required this.color});
+}
+
+List<IconWithColor> getIcons() {
+  return [
+    IconWithColor(iconCodePoint: personIcon, color: Colors.blue),
+    IconWithColor(iconCodePoint: workIcon, color: Colors.red),
+    IconWithColor(iconCodePoint: movieIcon, color: Colors.green),
+    IconWithColor(iconCodePoint: sportIcon, color: Colors.orange),
+    IconWithColor(iconCodePoint: travelIcon, color: Colors.purple),
+    IconWithColor(iconCodePoint: shopIcon, color: Colors.yellow),
+  ];
 }
